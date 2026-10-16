@@ -2,7 +2,7 @@
 
 ## First-principles position
 
-FORDLINK models Ford diagnostics from the vehicle-network structure outward rather than treating every ECU as a generic OBD responder.
+FORDLink models Ford diagnostics from the vehicle-network structure outward rather than treating every ECU as a generic OBD responder.
 
 ## Goals
 
@@ -10,7 +10,7 @@ FORDLINK models Ford diagnostics from the vehicle-network structure outward rath
 - Ford-specific module/identity knowledge separated from generic standards behaviour;
 - bounded read-only manufacturer discovery;
 - signals, procedures and service knowledge represented as distinct contracts;
-- one shared LINK engine for transport, standards, sequencing and safety.
+- one shared Link engine for transport, standards, sequencing and safety.
 
 ## Evidence policy
 
@@ -28,7 +28,7 @@ Procedure definitions have a higher evidence bar than read-only identity/live da
 
 ## Shared ownership
 
-If logic is generic across manufacturers, it belongs in LINK. Ford-specific interpretation remains here. This avoids a "Ford fork" of OBD/UDS while still allowing Ford's network model to be explicit.
+If logic is generic across manufacturers, it belongs in Link. Ford-specific interpretation remains here. This avoids a "Ford fork" of OBD/UDS while still allowing Ford's network model to be explicit.
 
 ## Failure policy
 

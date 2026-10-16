@@ -89,7 +89,7 @@ final class ConnectionViewModel: NSObject, ObservableObject, @preconcurrency For
         guard let snapshot = controller.csvDataSnapshot() else { return }
         let data = snapshot as Data
         let url = FileManager.default.temporaryDirectory
-            .appendingPathComponent("FORDLINK-diagnostic-evidence-\(UUID().uuidString).csv")
+            .appendingPathComponent("FORDLink-diagnostic-evidence-\(UUID().uuidString).csv")
         do {
             try data.write(to: url, options: .atomic)
             csvExportURL = url

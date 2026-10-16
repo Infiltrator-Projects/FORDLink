@@ -96,7 +96,7 @@ static void append_dtcs(GtkWidget *card, const char *prefix,
 static void append_vehicle(GtkWidget *body, ProductContext *context)
 {
     GtkWidget *vehicle = link_gtk_card_new("VEHICLE", "Ford diagnostic identity");
-    GtkWidget *connection = link_gtk_card_new("CONNECTION", "LINK adapter and diagnostic session");
+    GtkWidget *connection = link_gtk_card_new("CONNECTION", "Link adapter and diagnostic session");
     const char *vin = context->diagnostic_valid
         ? link_diagnostic_flow_standard_vin(&context->diagnostic) : NULL;
 
@@ -104,7 +104,7 @@ static void append_vehicle(GtkWidget *body, ProductContext *context)
     link_gtk_card_append_detail(vehicle, "VIN",
         vin != NULL && vin[0] != '\0' ? vin : "Waiting for SAE Mode 09 VIN");
     link_gtk_card_append_detail(vehicle, "Standards core",
-        "LINK · SAE J1979 / OBD-II / ISO-TP / UDS");
+        "Link · SAE J1979 / OBD-II / ISO-TP / UDS");
 
     link_gtk_card_append_status(connection,
         context->connected ? "LINKED" : "NOT LINKED",
@@ -112,10 +112,10 @@ static void append_vehicle(GtkWidget *body, ProductContext *context)
     link_gtk_card_append_detail(connection, "Adapter",
         context->adapter_identity[0] != '\0'
             ? context->adapter_identity
-            : "Select an adapter above and press LINK UP");
+            : "Select an adapter above and press Link UP");
     link_gtk_card_append_detail(connection, "Diagnostic state", stage(context));
     link_gtk_card_append_note(connection,
-        "FORDLINK is GUI-first. LINK owns the common standards flow. Ford-specific claims remain evidence-gated.");
+        "FORDLink is GUI-first. Link owns the common standards flow. Ford-specific claims remain evidence-gated.");
 
     gtk_box_append(GTK_BOX(body), vehicle);
     gtk_box_append(GTK_BOX(body), connection);
@@ -158,7 +158,7 @@ static void append_modules(GtkWidget *body, ProductContext *context)
     link_gtk_card_append_detail(card, "MS-CAN",
         "Enhanced Ford lane · explicit adapter/network support required");
     link_gtk_card_append_note(card,
-        "Additional Ford CAN lanes are profile-specific. FORDLINK records them explicitly rather than guessing module placement or copying proprietary databases.");
+        "Additional Ford CAN lanes are profile-specific. FORDLink records them explicitly rather than guessing module placement or copying proprietary databases.");
     gtk_box_append(GTK_BOX(body), card);
 
     {
@@ -345,7 +345,7 @@ static void append_graphs(GtkWidget *body, ProductContext *context)
                    channel_count);
     link_gtk_card_append_detail(card, "Current session", samples);
     link_gtk_card_append_detail(card, "Sampled parameters", channels);
-    link_gtk_card_append_detail(card, "Source", "Real LINK telemetry only");
+    link_gtk_card_append_detail(card, "Source", "Real Link telemetry only");
     link_gtk_card_append_note(card,
         "Signal history is retained by the shared telemetry/evidence layer; synthetic traces are never generated.");
     gtk_box_append(GTK_BOX(body), card);
@@ -360,7 +360,7 @@ static void append_log(GtkWidget *body, ProductContext *context)
     link_gtk_card_append_status(card, stage(context),
         context->diagnostic_ready ? "state-success" : "state-warning");
     link_gtk_card_append_detail(card, "Telemetry", samples);
-    link_gtk_card_append_detail(card, "Evidence path", "LINK shared recorder");
+    link_gtk_card_append_detail(card, "Evidence path", "Link shared recorder");
     link_gtk_card_append_note(card,
         "Use SAVE SESSION in the shared shell to preserve the timestamped investigation record.");
     gtk_box_append(GTK_BOX(body), card);
@@ -368,12 +368,12 @@ static void append_log(GtkWidget *body, ProductContext *context)
 
 static void append_settings(GtkWidget *body, ProductContext *context)
 {
-    GtkWidget *card = link_gtk_card_new("FORDLINK", "Application and adapter information");
+    GtkWidget *card = link_gtk_card_new("FORDLink", "Application and adapter information");
     link_gtk_card_append_detail(card, "Version", fordlink_version());
     link_gtk_card_append_detail(card, "Product", "Ford diagnostics");
     link_gtk_card_append_detail(card, "Adapter", context->adapter_identity[0] != '\0'
         ? context->adapter_identity : "No adapter connected");
-    link_gtk_card_append_detail(card, "Standards core", "LINK");
+    link_gtk_card_append_detail(card, "Standards core", "Link");
     link_gtk_card_append_detail(card, "Diagnostic mode", "Read-only discovery and live data");
     link_gtk_card_append_detail(card, "Manufacturer layer",
         "Ford-specific knowledge remains evidence-backed");
@@ -556,28 +556,28 @@ int main(int argc, char **argv)
     ProductContext context = {0};
     LinkGtkShellDescriptor descriptor = {0};
     LinkAboutInfo about_info = {
-        .product_name = "FORDLINK",
-        .subtitle = "FORD · LINK DIAGNOSTICS",
+        .product_name = "FORDLink",
+        .subtitle = "FORD · Link DIAGNOSTICS",
         .version = fordlink_version(),
         .description = "A C-first, open-source Ford vehicle diagnostics platform authored by Shannon Smith.",
         .build = infiltratr_build_profile_label(FORDLINK_BUILD_PROFILE_ID),
         .authors = "Shannon Smith",
         .copyright = "Copyright © 1993-2026 Shannon Smith",
-        .website = "https://github.com/Infiltrator-Projects/FORDLINK",
+        .website = "https://github.com/Infiltrator-Projects/FORDLink",
         .license_name = "GPL-3.0-or-later",
         .license_text =
-            "FORDLINK is free software licensed under the GNU General Public "
+            "FORDLink is free software licensed under the GNU General Public "
             "License version 3 or, at your option, any later version "
             "(GPL-3.0-or-later).\n\n"
             "See LICENSE in the source package for the complete licence text.",
         .credits = "Shannon Smith — Author and project maintainer"
     };
-    descriptor.app_id = "com.github.InfiltratorProjects.FORDLINK";
-    descriptor.window_title = "FORDLINK · Ford Diagnostics";
-    descriptor.brand_name = "FORDLINK";
-    descriptor.brand_subtitle = "FORD · LINK DIAGNOSTICS";
+    descriptor.app_id = "com.github.InfiltratorProjects.FORDLink";
+    descriptor.window_title = "FORDLink · Ford Diagnostics";
+    descriptor.brand_name = "FORDLink";
+    descriptor.brand_subtitle = "FORD · Link DIAGNOSTICS";
     descriptor.version = fordlink_version();
-    descriptor.emblem_resource = "/com/github/Infiltrator-Projects/FORDLINK/fordlink-emblem.png";
+    descriptor.emblem_resource = "/com/github/Infiltrator-Projects/FORDLink/fordlink-emblem.png";
     descriptor.css = css;
     descriptor.render_section = render;
     descriptor.about = &about_info;

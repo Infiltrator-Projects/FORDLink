@@ -2,19 +2,19 @@
 
 ## Purpose
 
-FORDLINK is the Ford manufacturer product face over LINK. It is deliberately richer than the current BMW/Audi faces because the repository already owns a Ford-specific network, module, signal and procedure model.
+FORDLink is the Ford manufacturer product face over Link. It is deliberately richer than the current BMW/Audi faces because the repository already owns a Ford-specific network, module, signal and procedure model.
 
 ## Dependency hierarchy
 
 ```text
-Infiltratr Common
+Libraries
         ↓
-       LINK
+       Link
         ↓
-    FORDLINK
+    FORDLink
 ```
 
-`fordlink-core` links publicly against `LINK::Core`. Generic transport, standards, diagnostic sequencing, safety and shared application behaviour remain in LINK.
+`fordlink-core` links publicly against `Link::Core`. Generic transport, standards, diagnostic sequencing, safety and shared application behaviour remain in Link.
 
 ## Ford product core
 
@@ -32,11 +32,11 @@ This separation prevents a growing manufacturer layer from turning into one undi
 
 ## Network model
 
-FORDLINK distinguishes HS-CAN, MS-CAN and additional profile-specific Ford network lanes. Standard OBD activity uses the normal LINK/OBD lane. Enhanced lanes require explicit adapter capability and verified physical routing; the data model does not pretend one generic CAN path reaches every Ford module.
+FORDLink distinguishes HS-CAN, MS-CAN and additional profile-specific Ford network lanes. Standard OBD activity uses the normal Link/OBD lane. Enhanced lanes require explicit adapter capability and verified physical routing; the data model does not pretend one generic CAN path reaches every Ford module.
 
 ## Module discovery
 
-The manufacturer scanner uses LINK's shared ECU-probe/safety machinery. Ford-specific target candidates and interpretation stay here.
+The manufacturer scanner uses Link's shared ECU-probe/safety machinery. Ford-specific target candidates and interpretation stay here.
 
 A module catalogue entry or known endpoint does not itself authorize every possible service. Discovery and procedure permissions remain bounded.
 
@@ -46,11 +46,11 @@ Signals and procedures are separate domains. A decoded live-data item does not i
 
 ## Platform faces
 
-Linux GTK4, LINK-shared Windows Discover and native iPhone presentation all consume FORDLINK::Core. Product identity remains local; shared application mechanics remain in LINK.
+Linux GTK4, Link-shared Windows Discover and native iPhone presentation all consume FORDLink::Core. Product identity remains local; shared application mechanics remain in Link.
 
 ## Version identity
 
-Root VERSION and the public FORDLINK version are checked for agreement. The smoke test also records the pinned LINK version, making dependency drift visible.
+Root VERSION and the public FORDLink version are checked for agreement. The smoke test also records the pinned Link version, making dependency drift visible.
 
 ## Tests
 
@@ -58,4 +58,4 @@ Dedicated tests cover network modelling, module catalogue, module scanning, sign
 
 ## Build boundaries
 
-`BUILD_TESTING` is the caller-owned CMake switch. The product registers its own tests only when enabled and never rewrites that cache setting while adding LINK. LINK owns its test policy independently. Apple packages receive the actual checked-out LINK commit through `LINK_SOURCE_REVISION`; a direct Xcode build without that input reports an unavailable revision instead of a stale hard-coded SHA. Manufacturer code and identity remain product-owned.
+`BUILD_TESTING` is the caller-owned CMake switch. The product registers its own tests only when enabled and never rewrites that cache setting while adding Link. Link owns its test policy independently. Apple packages receive the actual checked-out Link commit through `LINK_SOURCE_REVISION`; a direct Xcode build without that input reports an unavailable revision instead of a stale hard-coded SHA. Manufacturer code and identity remain product-owned.

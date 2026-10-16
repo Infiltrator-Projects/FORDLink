@@ -13,6 +13,6 @@
 #include "signal.c"
 #include "procedure.c"
 #endif
-const char *fordlink_product_name(void){return "FORDLINK";}
+const char *fordlink_product_name(void){return "FORDLink";}
 const char *fordlink_brand_name(void){return "Ford";}
 const char *fordlink_version(void){return FORDLINK_VERSION;}

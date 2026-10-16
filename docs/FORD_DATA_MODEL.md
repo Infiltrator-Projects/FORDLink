@@ -1,6 +1,6 @@
 # Ford diagnostic data model
 
-FORDLINK models live data as module-scoped signal definitions that can feed
+FORDLink models live data as module-scoped signal definitions that can feed
 Table, Dashboard and Graph views. `FordlinkSignalDefinition` stores the source
 (UDS DID or broadcast CAN frame), identifier, byte and bit offsets, endianness,
 signedness, scale factor, additive offset, unit, display range, precision and

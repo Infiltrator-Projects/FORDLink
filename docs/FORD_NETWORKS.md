@@ -1,11 +1,11 @@
 # Ford network model
 
-FORDLINK keeps Ford vehicle-network topology separate from module identity,
+FORDLink keeps Ford vehicle-network topology separate from module identity,
 diagnostic data and service procedures.
 
 The initial topology vocabulary is:
 
-| Network | Current meaning in FORDLINK |
+| Network | Current meaning in FORDLink |
 | --- | --- |
 | HS-CAN | High-speed Ford CAN lane used for the standard OBD path. Direct DLC access is represented with pins 6/14 and a 500 kbit/s default. |
 | MS-CAN | Ford medium-speed enhanced-diagnostics lane. Direct DLC access is represented with pins 3/11 and a 125 kbit/s default. Adapter support must be explicit; a generic ELM327 name is not enough. |
@@ -22,7 +22,7 @@ The structure was informed by observing the behaviour and architecture of mature
 Ford diagnostic software, including the separation of vehicle networks, module
 inventory, DTCs, live data, tests and service procedures.
 
-FORDLINK does **not** import or reproduce FORScan's native code, proprietary
+FORDLink does **not** import or reproduce FORScan's native code, proprietary
 module database, PID catalogue, service-procedure table, security algorithms or
 vehicle-profile data.
 

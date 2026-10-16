@@ -203,6 +203,6 @@ int main(void)
 {
     CHECK(test_ford_trace_replay_fixture() == 0);
     CHECK(test_bounded_module_scan() == 0);
-    puts("FORDLINK read-only module scanner and end-to-end trace replay passed");
+    puts("FORDLink read-only module scanner and end-to-end trace replay passed");
     return 0;
 }

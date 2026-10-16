@@ -103,7 +103,7 @@ if(FORDLINK_BUILD_LINUX_GUI)
   set(CPACK_GENERATOR "DEB")
   set(CPACK_PACKAGE_NAME "fordlink")
   set(CPACK_PACKAGE_VENDOR "Infiltrator Projects")
-  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Ford diagnostics GUI using LINK")
+  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Ford diagnostics GUI using Link")
   set(CPACK_PACKAGE_VERSION "${PROJECT_VERSION}")
   set(CPACK_PACKAGE_CONTACT "Infiltrator Projects")
   set(CPACK_PACKAGING_INSTALL_PREFIX "/usr")
@@ -121,13 +121,13 @@ if(FORDLINK_BUILD_WINDOWS_DISCOVER)
     message(FATAL_ERROR "FORDLINK_BUILD_WINDOWS_DISCOVER is Windows-only")
   endif()
   link_add_windows_discover(fordlink-discover
-    PRODUCT_NAME "FORDLINK" PRODUCT_SLUG "fordlink" WINDOW_CLASS "FORDLINKDiscoverWindow"
+    PRODUCT_NAME "FORDLink" PRODUCT_SLUG "fordlink" WINDOW_CLASS "FORDLINKDiscoverWindow"
     PRODUCT_VERSION "${PROJECT_VERSION}" PRODUCT_COPYRIGHT "Copyright (C) 1993-2026 Shannon Smith"
     PRODUCT_SUBTITLE "Ford Diagnostics"
     PRODUCT_DESCRIPTION "A C-first, open-source Ford vehicle diagnostics platform."
     PRODUCT_AUTHORS "Shannon Smith"
     PRODUCT_LICENSE_NAME "GPL-3.0-or-later"
-    PRODUCT_WEBSITE "https://github.com/Infiltrator-Projects/FORDLINK"
+    PRODUCT_WEBSITE "https://github.com/Infiltrator-Projects/FORDLink"
     PRODUCT_ICON_PNG "${CMAKE_CURRENT_SOURCE_DIR}/app/ios/FORDLINK/Assets.xcassets/AppIcon.appiconset/AppIcon-60@3x.png")
   target_link_libraries(fordlink-discover PRIVATE FORDLINK::Core)
   if(MSVC)

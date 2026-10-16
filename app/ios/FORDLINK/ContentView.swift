@@ -84,7 +84,7 @@ struct ContentView: View {
                     ? .rightToLeft : .leftToRight)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 LinkDiagnosticAboutButton(
-                    productName: "FORDLINK",
+                    productName: "FORDLink",
                     copyright: "© 1993-2026 Shannon Smith") {
                         showingAbout = true
                     }
@@ -104,16 +104,16 @@ struct ContentView: View {
 
     private var aboutInfo: LinkDiagnosticAboutInfo {
         LinkDiagnosticAboutInfo(
-            productName: "FORDLINK",
-            subtitle: "FORD · LINK DIAGNOSTICS",
+            productName: "FORDLink",
+            subtitle: "FORD · Link DIAGNOSTICS",
             version: model.versionText,
             summary: "A C-first, open-source Ford vehicle diagnostics platform authored by Shannon Smith.",
             build: "Source / Xcode build",
             authors: ["Shannon Smith"],
             copyright: "Copyright © 1993-2026 Shannon Smith",
-            website: URL(string: "https://github.com/Infiltrator-Projects/FORDLINK"),
+            website: URL(string: "https://github.com/Infiltrator-Projects/FORDLink"),
             licenseName: "GPL-3.0-or-later",
-            licenseText: "FORDLINK is free software licensed under the GNU General Public License version 3 or, at your option, any later version (GPL-3.0-or-later).\n\nSee LICENSE in the source package for the complete licence text.",
+            licenseText: "FORDLink is free software licensed under the GNU General Public License version 3 or, at your option, any later version (GPL-3.0-or-later).\n\nSee LICENSE in the source package for the complete licence text.",
             credits: ["Shannon Smith — Author and project maintainer"])
     }
 
@@ -122,11 +122,11 @@ struct ContentView: View {
             HStack(spacing: 14) {
                 ProductBadge()
                 VStack(alignment: .leading, spacing: 3) {
-                    Text("FORDLINK")
+                    Text("FORDLink")
                         .font(.system(size: 29, weight: .bold))
                         .tracking(1.2)
                         .foregroundStyle(ProductTheme.primary)
-                    Text("FORD · LINK DIAGNOSTICS")
+                    Text("FORD · Link DIAGNOSTICS")
                         .font(.caption2.bold())
                         .tracking(1.2)
                         .foregroundStyle(ProductTheme.accent)
@@ -195,7 +195,7 @@ struct ContentView: View {
                         productMetric("\(model.fordModuleCatalogueRows.count)", "Ford modules", "cpu")
                         productMetric("\(model.fordProcedureCapabilityRows.count)", "Service/test families", "wrench.and.screwdriver")
                     }
-                    Text("FORDLINK is ready to scan Ford networks and merge live vehicle evidence with the built-in catalogue.")
+                    Text("FORDLink is ready to scan Ford networks and merge live vehicle evidence with the built-in catalogue.")
                         .font(.caption)
                         .foregroundStyle(ProductTheme.secondary)
                 }
@@ -300,7 +300,7 @@ private struct ProductModulesView: View {
                     productValueRow("MS-CAN", "Enhanced Ford lane · supported adapter required", icon: "arrow.triangle.branch")
                     productDivider
                     productValueRow("Additional CAN lanes", "Vehicle/profile specific · never guessed", icon: "square.stack.3d.up")
-                    Text("FORDLINK now models Ford networks separately from modules. This lets discovery grow into HS-CAN, MS-CAN and later gateway-exposed lanes without folding everything into generic OBD.")
+                    Text("FORDLink now models Ford networks separately from modules. This lets discovery grow into HS-CAN, MS-CAN and later gateway-exposed lanes without folding everything into generic OBD.")
                         .font(.caption)
                         .foregroundStyle(ProductTheme.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -355,7 +355,7 @@ private struct ProductModulesView: View {
                     productValueRow("Advertised parameters", model.supportedPIDSummary, icon: "waveform.path.ecg")
                     productDivider
                     productValueRow("Capability", model.diagnosticCapabilityText, icon: "cpu")
-                    Text("This is the LINK-owned standard responder inventory. Ford-specific module discovery is added only when it is evidence-backed.")
+                    Text("This is the Link-owned standard responder inventory. Ford-specific module discovery is added only when it is evidence-backed.")
                         .font(.caption)
                         .foregroundStyle(ProductTheme.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -548,7 +548,7 @@ private struct ProductGraphView: View {
             VStack(alignment: .leading, spacing: 15) {
                 LinkLabeledPanel(title: "Live graphs", systemImage: "chart.xyaxis.line") {
                     Text(model.isActive
-                         ? "Live LINK telemetry · newest sample at right"
+                         ? "Live Link telemetry · newest sample at right"
                          : "Connect to populate the traces; graph channels are already configured.")
                         .font(.caption)
                         .foregroundStyle(ProductTheme.secondary)
@@ -605,7 +605,7 @@ private struct ProductTestsView: View {
                     }
                 }
                 LinkLabeledPanel(title: "Additional tests", systemImage: "checkmark.seal") {
-                    Text("FORDLINK now has explicit capability metadata for module self-tests and component/actuator tests. Actual commands remain disabled until the active module/profile is independently verified.")
+                    Text("FORDLink now has explicit capability metadata for module self-tests and component/actuator tests. Actual commands remain disabled until the active module/profile is independently verified.")
                         .font(.caption)
                         .foregroundStyle(ProductTheme.secondary)
                 }
@@ -667,12 +667,12 @@ private struct ProductSettingsView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 15) {
-                LinkLabeledPanel(title: "FORDLINK", systemImage: "gearshape.fill") {
+                LinkLabeledPanel(title: "FORDLink", systemImage: "gearshape.fill") {
                     productValueRow("Version", model.versionText, icon: "number.circle")
                     productDivider
                     productValueRow("Adapter", model.peripheralName, icon: "antenna.radiowaves.left.and.right")
                     productDivider
-                    productValueRow("Standards core", "LINK · read-only diagnostic flow", icon: "shield.lefthalf.filled")
+                    productValueRow("Standards core", "Link · read-only diagnostic flow", icon: "shield.lefthalf.filled")
                 }
 
                 LinkLabeledPanel(title: "Language", systemImage: "globe") {

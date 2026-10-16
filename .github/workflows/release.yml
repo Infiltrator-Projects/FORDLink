@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-name: FORDLINK Release
+name: FORDLink Release
 on:
   workflow_run:
-    workflows: ["FORDLINK CI"]
+    workflows: ["FORDLink CI"]
     types: [completed]
 permissions:
   contents: read
@@ -62,20 +62,20 @@ jobs:
             (cd release && sha256sum -c "SHA256SUMS-$platform")
           done
           expected=$(printf '%s\n' \
-            "FORDLINK-$version-source.zip" "FORDLINK-$version-linux-amd64.deb" \
-            "FORDLINK-$version-windows-discover.exe" "FORDLINK-$version-unsigned.ipa" | sort)
+            "FORDLink-$version-source.zip" "FORDLink-$version-linux-amd64.deb" \
+            "FORDLink-$version-windows-discover.exe" "FORDLink-$version-unsigned.ipa" | sort)
           actual=$(find release -maxdepth 1 -type f ! -name 'SOURCE_COMMIT-*' ! -name 'SHA256SUMS-*' -printf '%f\n' | sort)
           test "$actual" = "$expected"
-          test "$(dpkg-deb -f "release/FORDLINK-$version-linux-amd64.deb" Package)" = fordlink
-          test "$(dpkg-deb -f "release/FORDLINK-$version-linux-amd64.deb" Version)" = "$version"
-          unzip -tq "release/FORDLINK-$version-source.zip"
-          unzip -tq "release/FORDLINK-$version-unsigned.ipa"
+          test "$(dpkg-deb -f "release/FORDLink-$version-linux-amd64.deb" Package)" = fordlink
+          test "$(dpkg-deb -f "release/FORDLink-$version-linux-amd64.deb" Version)" = "$version"
+          unzip -tq "release/FORDLink-$version-source.zip"
+          unzip -tq "release/FORDLink-$version-unsigned.ipa"
           rm release/SOURCE_COMMIT-* release/SHA256SUMS-*
-          (cd release && sha256sum FORDLINK-* > SHA256SUMS.txt)
+          (cd release && sha256sum FORDLink-* > SHA256SUMS.txt)
           state=$(gh release view "$tag" --json isDraft,targetCommitish --jq '[.isDraft,.targetCommitish] | @tsv' 2>/dev/null || true)
           if [[ -z "$state" ]]; then
             gh release create "$tag" --target "$EXPECTED_SHA" --draft \
-              --title "FORDLINK $version" \
+              --title "FORDLink $version" \
               --notes "Qualified Linux, Windows and unsigned iPhone artifacts from $EXPECTED_SHA."
             draft=true
           else

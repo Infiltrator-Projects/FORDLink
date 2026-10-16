@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=FORDLINK
+Name=FORDLink
 Comment=Ford vehicle diagnostics
 Exec=fordlink
 Icon=fordlink

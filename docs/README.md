@@ -1,9 +1,9 @@
 # Documentation
 
-FORDLINK follows the common Infiltrator documentation baseline.
+FORDLink follows the common Infiltrator documentation baseline.
 
 - [Engineering philosophy](PHILOSOPHY.md) — governing engineering and documentation standard.
-- [Architecture](ARCHITECTURE.md) — LINK boundary and Ford product model.
+- [Architecture](ARCHITECTURE.md) — Link boundary and Ford product model.
 - [Design](DESIGN.md) — network/evidence/safety philosophy.
 - [Decisions](DECISIONS.md) — durable manufacturer choices.
 - [Roadmap](ROADMAP.md) — Ford-specific direction.

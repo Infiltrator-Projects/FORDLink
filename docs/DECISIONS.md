@@ -8,17 +8,17 @@
 
 **Consequence.** Module discovery and procedures carry network identity and require adapter capability.
 
-## ADR-002 — Generic diagnostic mechanics remain in LINK
+## ADR-002 — Generic diagnostic mechanics remain in Link
 
-**Decision.** ISO-TP, UDS, OBD, sequencing, safety and common application flow stay in LINK.
+**Decision.** ISO-TP, UDS, OBD, sequencing, safety and common application flow stay in Link.
 
 **Rationale.** Ford-specific capability should not fork standards behaviour.
 
-**Consequence.** FORDLINK owns targets/definitions/interpretation, not the shared protocol engine.
+**Consequence.** FORDLink owns targets/definitions/interpretation, not the shared protocol engine.
 
 ## ADR-003 — Manufacturer scanning is bounded and read-only
 
-**Decision.** The current Ford manufacturer scanner is limited to reviewed identity/DTC-style reads through LINK safety machinery.
+**Decision.** The current Ford manufacturer scanner is limited to reviewed identity/DTC-style reads through Link safety machinery.
 
 **Rationale.** Broad address sweeps and service execution are not equivalent to harmless discovery.
 
@@ -40,9 +40,9 @@
 
 **Consequence.** Unsupported definitions stay absent instead of being imported without evidence.
 
-## ADR-006 — Exact LINK dependency identity is tested
+## ADR-006 — Exact Link dependency identity is tested
 
-**Decision.** Product smoke testing records the expected LINK version from the pinned dependency.
+**Decision.** Product smoke testing records the expected Link version from the pinned dependency.
 
 **Rationale.** Manufacturer behaviour must be tied to the shared engine revision it was tested with.
 

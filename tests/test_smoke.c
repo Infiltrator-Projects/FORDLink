@@ -14,10 +14,10 @@
 
 int main(void)
 {
-    if (strcmp(fordlink_product_name(), "FORDLINK") != 0) return 1;
+    if (strcmp(fordlink_product_name(), "FORDLink") != 0) return 1;
     if (strcmp(fordlink_brand_name(), "Ford") != 0) return 2;
     if (strcmp(fordlink_version(), FORDLINK_EXPECTED_VERSION) != 0) return 3;
     if (strcmp(LINK_VERSION_STRING, FORDLINK_EXPECTED_LINK_VERSION) != 0) return 4;
-    puts("FORDLINK product and pinned LINK smoke test passed");
+    puts("FORDLink product and pinned Link smoke test passed");
     return 0;
 }

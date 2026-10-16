@@ -49,6 +49,6 @@ int main(void)
           FORDLINK_NETWORK_UNKNOWN);
     CHECK(strcmp(fordlink_network_kind_name(FORDLINK_NETWORK_UNKNOWN), "Unknown") == 0);
 
-    puts("FORDLINK Ford network model passed");
+    puts("FORDLink Ford network model passed");
     return 0;
 }

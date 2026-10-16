@@ -2,7 +2,7 @@
 
 ## Automated coverage
 
-FORDLINK has direct C regression tests for:
+FORDLink has direct C regression tests for:
 
 - product/dependency smoke integration;
 - Ford network model;
@@ -11,11 +11,11 @@ FORDLINK has direct C regression tests for:
 - signal model;
 - procedure model.
 
-These tests sit above LINK's own protocol, transport and safety suite.
+These tests sit above Link's own protocol, transport and safety suite.
 
 ## Layered evidence
 
-A passing FORDLINK unit test proves product-model behaviour. LINK tests prove shared transport/protocol contracts. Neither alone proves an MS-CAN switch or module response on a physical Ford vehicle.
+A passing FORDLink unit test proves product-model behaviour. Link tests prove shared transport/protocol contracts. Neither alone proves an MS-CAN switch or module response on a physical Ford vehicle.
 
 ## Network validation
 
@@ -37,7 +37,7 @@ Real Ford vehicles and adapters remain required for module/network qualification
 
 ## Release criterion
 
-The exact FORDLINK source and LINK dependency must pass product and shared CI. Documentation must distinguish modelled, test-covered and physically verified capability.
+The exact FORDLink source and Link dependency must pass product and shared CI. Documentation must distinguish modelled, test-covered and physically verified capability.
 
 ## Qualified publication
 

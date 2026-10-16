@@ -8,7 +8,7 @@
 - bounded read-only manufacturer scanner;
 - Ford signal and procedure models;
 - dedicated tests for networks, modules, scanning, signals and procedures;
-- Linux, Windows Discover and iPhone product faces over LINK.
+- Linux, Windows Discover and iPhone product faces over Link.
 
 ## Near-term priorities
 
@@ -16,14 +16,14 @@
 - implement adapter-aware enhanced-lane switching only where physically proven;
 - extend manufacturer live-data definitions with provenance;
 - keep procedures disabled/unavailable until their request, preconditions and postconditions are understood;
-- continue pushing generic mechanics into LINK.
+- continue pushing generic mechanics into Link.
 
 ## Longer-term direction
 
 - VIN/profile-driven network/module selection;
 - broader Ford model/platform coverage;
 - verified enhanced service procedures with explicit safety gates;
-- richer manufacturer diagnostics without weakening LINK's deny-by-default policy.
+- richer manufacturer diagnostics without weakening Link's deny-by-default policy.
 
 ## Completion rule
 

@@ -41,11 +41,11 @@ xcodebuild \
 
 app="$derived/Build/Products/Release-iphoneos/FORDLINK.app"
 test -d "$app"
-test -x "$app/FORDLINK"
-/usr/bin/lipo -info "$app/FORDLINK" | grep -q arm64
+test -x "$app/FORDLink"
+/usr/bin/lipo -info "$app/FORDLink" | grep -q arm64
 
 if [[ -z "$out_name" ]]; then
-  out_name="FORDLINK-${version}-unsigned.ipa"
+  out_name="FORDLink-${version}-unsigned.ipa"
 fi
 ipa="$out_dir/$out_name"
 mkdir -p "$package/Payload"

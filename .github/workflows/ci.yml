@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
-name: FORDLINK CI
+name: FORDLink CI
 on:
   push:
     branches: [main]
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           submodules: recursive
-      - name: Verify exact LINK pin
+      - name: Verify exact Link pin
         shell: bash
         run: |
           set -euo pipefail
@@ -28,7 +28,7 @@ jobs:
           test "$link_sha" = "$(git -C src/link rev-parse HEAD)"
           link_version="$(tr -d '[:space:]' < src/link/VERSION)"
           grep -Fq "#define LINK_VERSION_STRING \"$link_version\"" src/link/include/link/version.h
-      - name: Verify LINK ownership boundary
+      - name: Verify Link ownership boundary
         shell: bash
         run: |
           set -euo pipefail
@@ -40,7 +40,7 @@ jobs:
           test ! -e src/uds/uds.c
           test ! -e platform/apple/FordLinkBLETransport.m
           test ! -e platform/apple/FordLinkBLETransport.h
-          test ! -e platform/apple/FordLinkBLETransport+FORDLINK.h
+          test ! -e platform/apple/FordLinkBLETransport+FORDLink.h
           ! grep -Fq 'mercedes_me_' src/fordlink.c
           grep -Fq 'LinkPortableCore.c' src/fordlink.c
           grep -Fq 'LinkPortableObd2.c' app/ios/FORDLINK.xcodeproj/project.pbxproj
@@ -60,17 +60,17 @@ jobs:
           version=$(tr -d '[:space:]' < VERSION)
           out="$RUNNER_TEMP/qualified-core"
           source_root=$(mktemp -d)
-          staging="$source_root/FORDLINK-$version"
+          staging="$source_root/FORDLink-$version"
           trap 'rm -rf "$source_root"' EXIT
           mkdir -p "$out" "$staging"
           git archive HEAD | tar -x -C "$staging"
           export ARCHIVE_ROOT="$staging"
           git submodule foreach --recursive 'mkdir -p "$ARCHIVE_ROOT/$displaypath"; git archive HEAD | tar -x -C "$ARCHIVE_ROOT/$displaypath"'
-          (cd "$source_root" && zip -qry "$out/FORDLINK-$version-source.zip" "FORDLINK-$version")
-          unzip -tq "$out/FORDLINK-$version-source.zip"
+          (cd "$source_root" && zip -qry "$out/FORDLink-$version-source.zip" "FORDLink-$version")
+          unzip -tq "$out/FORDLink-$version-source.zip"
           
           printf '%s\n' "$GITHUB_SHA" > "$out/SOURCE_COMMIT-core"
-          (cd "$out" && sha256sum FORDLINK-* > SHA256SUMS-core)
+          (cd "$out" && sha256sum FORDLink-* > SHA256SUMS-core)
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: qualified-core
@@ -144,8 +144,8 @@ jobs:
           set -euo pipefail
           log="$RUNNER_TEMP/navigation.log"
           GTK_A11Y=none G_DEBUG=fatal-warnings timeout 45s xvfb-run -a ./build-linux/fordlink --ui-navigation-stress | tee "$log"
-          grep -Fq 'LINK GTK timed navigation stress verified:' "$log"
-          grep -Fq 'FORDLINK is GUI-first' app/linux/main.c
+          grep -Fq 'Link GTK timed navigation stress verified:' "$log"
+          grep -Fq 'FORDLink is GUI-first' app/linux/main.c
           grep -Fq 'LinkTaskTile(.vehicle)' app/ios/FORDLINK/ContentView.swift
           grep -Fq 'LinkTaskTile(.errors)' app/ios/FORDLINK/ContentView.swift
           grep -Fq 'LinkTaskTile(.table)' app/ios/FORDLINK/ContentView.swift
@@ -159,11 +159,11 @@ jobs:
           ! grep -Fq 'LinkHomeTile("OBD"' app/ios/FORDLINK/ContentView.swift
           grep -Fq 'return self.shared.standardLiveValueRows;' platform/apple/FordLinkDiagnosticsController.m
           if grep -Eq '\.link-(connection-bar|device-row|adapter-combo|toolbar-button|link-button|save-session-button|card|status-chip)[^{]*\{[^}]*((min|max)-(width|height)|padding|border-radius)' app/linux/main.c; then
-            echo 'Shared Linux shell geometry must come from LINK, not FORDLINK CSS.' >&2
+            echo 'Shared Linux shell geometry must come from Link, not FORDLink CSS.' >&2
             exit 1
           fi
           if grep -Fq 'adapter_combo_width' app/linux/main.c src/link/platform/linux/link-gtk-shell.h; then
-            echo 'Adapter-selector width must be LINK-owned.' >&2
+            echo 'Adapter-selector width must be Link-owned.' >&2
             exit 1
           fi
           grep -Fq 'gtk_widget_set_hexpand(shell->device_combo, TRUE);' src/link/platform/linux/link-gtk-shell.c
@@ -200,10 +200,10 @@ jobs:
           test "${#packages[@]}" -eq 1
           test "$(dpkg-deb -f "${packages[0]}" Package)" = fordlink
           test "$(dpkg-deb -f "${packages[0]}" Version)" = "$version"
-          install -m 0644 "${packages[0]}" "$out/FORDLINK-$version-linux-amd64.deb"
+          install -m 0644 "${packages[0]}" "$out/FORDLink-$version-linux-amd64.deb"
           
           printf '%s\n' "$GITHUB_SHA" > "$out/SOURCE_COMMIT-linux"
-          (cd "$out" && sha256sum FORDLINK-* > SHA256SUMS-linux)
+          (cd "$out" && sha256sum FORDLink-* > SHA256SUMS-linux)
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: qualified-linux
@@ -232,7 +232,7 @@ jobs:
         run: cmake --build build-win32 --config Release --target fordlink-discover --parallel
       - name: Prove GUI launches
         shell: powershell
-        run: "& 'src/link/platform/windows/smoke-launch.ps1' -Executable 'build-win32/Release/fordlink-discover.exe' -ExpectedTitle 'FORDLINK Discover'"
+        run: "& 'src/link/platform/windows/smoke-launch.ps1' -Executable 'build-win32/Release/fordlink-discover.exe' -ExpectedTitle 'FORDLink Discover'"
 
       - name: Seal qualified windows candidate
         shell: powershell
@@ -241,7 +241,7 @@ jobs:
           $version = (Get-Content VERSION -Raw).Trim()
           $out = Join-Path $env:RUNNER_TEMP 'qualified-windows'
           New-Item -ItemType Directory -Force $out | Out-Null
-          $name = "FORDLINK-$version-windows-discover.exe"
+          $name = "FORDLink-$version-windows-discover.exe"
           Copy-Item 'build-win32/Release/fordlink-discover.exe' (Join-Path $out $name)
           $hash = (Get-FileHash (Join-Path $out $name) -Algorithm SHA256).Hash.ToLowerInvariant()
           "$hash  $name" | Set-Content (Join-Path $out 'SHA256SUMS-windows') -Encoding ascii -NoNewline
@@ -280,9 +280,9 @@ jobs:
           out="$RUNNER_TEMP/qualified-iphone"
           mkdir -p "$out"
           bash scripts/build-ios-ipa.sh "$RUNNER_TEMP/iphone-build"
-          cp "$RUNNER_TEMP/iphone-build/FORDLINK-$version-unsigned.ipa" "$out/"
+          cp "$RUNNER_TEMP/iphone-build/FORDLink-$version-unsigned.ipa" "$out/"
           printf '%s\n' "$GITHUB_SHA" > "$out/SOURCE_COMMIT-iphone"
-          (cd "$out" && shasum -a 256 FORDLINK-* > SHA256SUMS-iphone)
+          (cd "$out" && shasum -a 256 FORDLink-* > SHA256SUMS-iphone)
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: qualified-iphone
