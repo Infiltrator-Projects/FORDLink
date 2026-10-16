@@ -4,15 +4,7 @@
 #include <TargetConditionals.h>
 #endif
 #if defined(__APPLE__) && TARGET_OS_IOS
-#ifndef LINK_SOURCE_REVISION
-#define LINK_SOURCE_REVISION "0caaf4026dcf807397649cd27a38f25ec3be2934"
-#define FORDLINK_DEFINED_LINK_SOURCE_REVISION 1
-#endif
 #include "link/platform/apple/LinkPortableCore.c"
-#ifdef FORDLINK_DEFINED_LINK_SOURCE_REVISION
-#undef FORDLINK_DEFINED_LINK_SOURCE_REVISION
-#undef LINK_SOURCE_REVISION
-#endif
 /* Xcode compiles one product-owned C translation unit for Ford-specific code. */
 #include "network.c"
 #include "module.c"

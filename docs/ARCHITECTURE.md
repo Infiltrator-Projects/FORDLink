@@ -55,3 +55,7 @@ Root VERSION and the public FORDLINK version are checked for agreement. The smok
 ## Tests
 
 Dedicated tests cover network modelling, module catalogue, module scanning, signals, procedures and product smoke/dependency integration.
+
+## Build boundaries
+
+`BUILD_TESTING` is the caller-owned CMake switch. The product registers its own tests only when enabled and never rewrites that cache setting while adding LINK. LINK owns its test policy independently. Apple packages receive the actual checked-out LINK commit through `LINK_SOURCE_REVISION`; a direct Xcode build without that input reports an unavailable revision instead of a stale hard-coded SHA. Manufacturer code and identity remain product-owned.

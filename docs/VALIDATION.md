@@ -38,3 +38,7 @@ Real Ford vehicles and adapters remain required for module/network qualification
 ## Release criterion
 
 The exact FORDLINK source and LINK dependency must pass product and shared CI. Documentation must distinguish modelled, test-covered and physically verified capability.
+
+## Qualified publication
+
+`VERSION` is the sole release-intent authority. CI builds and tests each distributable once, then preserves per-platform SHA-256 manifests and the exact source commit. The release workflow downloads only artifacts from that successful push-to-`main` run; it never recompiles. A draft is byte-compared before publication and the public release is compared again. Published tags and bytes remain immutable. Windows qualification retains the x86 executable required by J2534 and runs its real window/title/close test on a clean x64 Windows runner. Native Linux verification remains separate from the generic public package.
