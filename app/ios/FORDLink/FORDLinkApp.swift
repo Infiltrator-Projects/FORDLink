@@ -2,7 +2,7 @@
 import SwiftUI
 
 @main
-struct FORDLINKApp: App {
+struct FORDLinkApp: App {
     var body: some Scene {
         WindowGroup { ContentView() }
     }

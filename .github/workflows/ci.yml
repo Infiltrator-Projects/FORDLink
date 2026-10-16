@@ -43,12 +43,12 @@ jobs:
           test ! -e platform/apple/FordLinkBLETransport+FORDLink.h
           ! grep -Fq 'mercedes_me_' src/fordlink.c
           grep -Fq 'LinkPortableCore.c' src/fordlink.c
-          grep -Fq 'LinkPortableObd2.c' app/ios/FORDLINK.xcodeproj/project.pbxproj
-          grep -Fq 'LinkPortableUds.c' app/ios/FORDLINK.xcodeproj/project.pbxproj
-          ! grep -Fq 'LINK_ENABLE_MERCEDES_ME_NATIVE=0' app/ios/FORDLINK.xcodeproj/project.pbxproj
-          grep -Fq 'LINK_ENABLE_MERCEDES_ME_NATIVE=1' app/ios/FORDLINK.xcodeproj/project.pbxproj
+          grep -Fq 'LinkPortableObd2.c' app/ios/FORDLink.xcodeproj/project.pbxproj
+          grep -Fq 'LinkPortableUds.c' app/ios/FORDLink.xcodeproj/project.pbxproj
+          ! grep -Fq 'LINK_ENABLE_MERCEDES_ME_NATIVE=0' app/ios/FORDLink.xcodeproj/project.pbxproj
+          grep -Fq 'LINK_ENABLE_MERCEDES_ME_NATIVE=1' app/ios/FORDLink.xcodeproj/project.pbxproj
           grep -Fq 'link_fault_scan_presentation_state' app/linux/main.c
-          grep -Fq 'faultScanPresentationStateName' app/ios/FORDLINK/ConnectionViewModel.swift
+          grep -Fq 'faultScanPresentationStateName' app/ios/FORDLink/ConnectionViewModel.swift
       - run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
       - run: cmake --build build --parallel
       - run: ctest --test-dir build --output-on-failure
@@ -146,17 +146,17 @@ jobs:
           GTK_A11Y=none G_DEBUG=fatal-warnings timeout 45s xvfb-run -a ./build-linux/fordlink --ui-navigation-stress | tee "$log"
           grep -Fq 'Link GTK timed navigation stress verified:' "$log"
           grep -Fq 'FORDLink is GUI-first' app/linux/main.c
-          grep -Fq 'LinkTaskTile(.vehicle)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkTaskTile(.errors)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkTaskTile(.table)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkTaskTile(.graph)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkTaskTile(.tests)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkTaskTile(.services)' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkDiagnosticAboutButton' app/ios/FORDLINK/ContentView.swift
-          grep -Fq 'LinkDiagnosticAboutView' app/ios/FORDLINK/ContentView.swift
+          grep -Fq 'LinkTaskTile(.vehicle)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkTaskTile(.errors)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkTaskTile(.table)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkTaskTile(.graph)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkTaskTile(.tests)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkTaskTile(.services)' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkDiagnosticAboutButton' app/ios/FORDLink/ContentView.swift
+          grep -Fq 'LinkDiagnosticAboutView' app/ios/FORDLink/ContentView.swift
           grep -Fq 'descriptor.about = &about_info;' app/linux/main.c
           grep -Fq 'link_gtk_show_about' src/link/platform/linux/link-gtk-about.c
-          ! grep -Fq 'LinkHomeTile("OBD"' app/ios/FORDLINK/ContentView.swift
+          ! grep -Fq 'LinkHomeTile("OBD"' app/ios/FORDLink/ContentView.swift
           grep -Fq 'return self.shared.standardLiveValueRows;' platform/apple/FordLinkDiagnosticsController.m
           if grep -Eq '\.link-(connection-bar|device-row|adapter-combo|toolbar-button|link-button|save-session-button|card|status-chip)[^{]*\{[^}]*((min|max)-(width|height)|padding|border-radius)' app/linux/main.c; then
             echo 'Shared Linux shell geometry must come from Link, not FORDLink CSS.' >&2
@@ -266,9 +266,9 @@ jobs:
         run: |
           set -euo pipefail
           version="$(tr -d '[:space:]' < VERSION)"
-          project_versions="$(grep -E '^[[:space:]]*MARKETING_VERSION = ' app/ios/FORDLINK.xcodeproj/project.pbxproj | sed -E 's/.*= ([^;]+);/\1/' | sort -u)"
+          project_versions="$(grep -E '^[[:space:]]*MARKETING_VERSION = ' app/ios/FORDLink.xcodeproj/project.pbxproj | sed -E 's/.*= ([^;]+);/\1/' | sort -u)"
           test "$project_versions" = "$version"
-          xcodebuild -project app/ios/FORDLINK.xcodeproj -scheme FORDLINK -configuration Release \
+          xcodebuild -project app/ios/FORDLink.xcodeproj -scheme FORDLink -configuration Release \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' CODE_SIGNING_ALLOWED=NO \
             MARKETING_VERSION="$version" FORDLINK_SOURCE_REVISION="$GITHUB_SHA" LINK_SOURCE_REVISION="$(git -C src/link rev-parse HEAD)" build
 

@@ -5,7 +5,7 @@ string(STRIP "${FORDLINK_PROJECT_VERSION}" FORDLINK_PROJECT_VERSION)
 if(NOT FORDLINK_PROJECT_VERSION MATCHES "^[0-9]+\\.[0-9]+\\.[0-9]+$")
   message(FATAL_ERROR "VERSION must contain a semantic major.minor.patch version")
 endif()
-project(FORDLINK VERSION "${FORDLINK_PROJECT_VERSION}" LANGUAGES C)
+project(FORDLink VERSION "${FORDLINK_PROJECT_VERSION}" LANGUAGES C)
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/include/fordlink/fordlink.h" FORDLINK_PUBLIC_VERSION_HEADER)
 string(REGEX MATCH
@@ -38,10 +38,10 @@ add_library(fordlink-core STATIC
   src/module_scan.c
   src/signal.c
   src/procedure.c)
-add_library(FORDLINK::Core ALIAS fordlink-core)
+add_library(FORDLink::Core ALIAS fordlink-core)
 target_include_directories(fordlink-core PUBLIC include)
 target_compile_definitions(fordlink-core PRIVATE FORDLINK_VERSION="${PROJECT_VERSION}")
-target_link_libraries(fordlink-core PUBLIC LINK::Core)
+target_link_libraries(fordlink-core PUBLIC Link::Core)
 
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/src/link/VERSION" FORDLINK_PINNED_LINK_VERSION)
 string(STRIP "${FORDLINK_PINNED_LINK_VERSION}" FORDLINK_PINNED_LINK_VERSION)
@@ -50,23 +50,23 @@ if(BUILD_TESTING)
   target_compile_definitions(fordlink-smoke PRIVATE
     FORDLINK_EXPECTED_VERSION="${PROJECT_VERSION}"
     FORDLINK_EXPECTED_LINK_VERSION="${FORDLINK_PINNED_LINK_VERSION}")
-  target_link_libraries(fordlink-smoke PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-smoke PRIVATE FORDLink::Core)
   add_test(NAME fordlink-smoke COMMAND fordlink-smoke)
   
   add_executable(fordlink-network tests/test_network.c)
-  target_link_libraries(fordlink-network PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-network PRIVATE FORDLink::Core)
   add_test(NAME fordlink-network COMMAND fordlink-network)
   add_executable(fordlink-modules tests/test_modules.c)
-  target_link_libraries(fordlink-modules PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-modules PRIVATE FORDLink::Core)
   add_test(NAME fordlink-modules COMMAND fordlink-modules)
   add_executable(fordlink-module-scan tests/test_module_scan.c)
-  target_link_libraries(fordlink-module-scan PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-module-scan PRIVATE FORDLink::Core)
   add_test(NAME fordlink-module-scan COMMAND fordlink-module-scan)
   add_executable(fordlink-signal tests/test_signal.c)
-  target_link_libraries(fordlink-signal PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-signal PRIVATE FORDLink::Core)
   add_test(NAME fordlink-signal COMMAND fordlink-signal)
   add_executable(fordlink-procedure tests/test_procedure.c)
-  target_link_libraries(fordlink-procedure PRIVATE FORDLINK::Core)
+  target_link_libraries(fordlink-procedure PRIVATE FORDLink::Core)
   add_test(NAME fordlink-procedure COMMAND fordlink-procedure)
 endif()
 
@@ -91,7 +91,7 @@ if(FORDLINK_BUILD_LINUX_GUI)
     VERBATIM)
   add_executable(fordlink app/linux/main.c "${FORDLINK_LINUX_RESOURCE_SOURCE}")
   set_source_files_properties("${FORDLINK_LINUX_RESOURCE_SOURCE}" PROPERTIES COMPILE_OPTIONS "-w")
-  target_link_libraries(fordlink PRIVATE FORDLINK::Core PkgConfig::GTK4)
+  target_link_libraries(fordlink PRIVATE FORDLink::Core PkgConfig::GTK4)
   target_compile_definitions(fordlink PRIVATE
     FORDLINK_BUILD_PROFILE_ID="${FORDLINK_BUILD_PROFILE}")
   link_enable_linux_gtk_shell(fordlink UDEV_RULE_NAME "60-fordlink-openport2.rules")
@@ -128,8 +128,8 @@ if(FORDLINK_BUILD_WINDOWS_DISCOVER)
     PRODUCT_AUTHORS "Shannon Smith"
     PRODUCT_LICENSE_NAME "GPL-3.0-or-later"
     PRODUCT_WEBSITE "https://github.com/Infiltrator-Projects/FORDLink"
-    PRODUCT_ICON_PNG "${CMAKE_CURRENT_SOURCE_DIR}/app/ios/FORDLINK/Assets.xcassets/AppIcon.appiconset/AppIcon-60@3x.png")
-  target_link_libraries(fordlink-discover PRIVATE FORDLINK::Core)
+    PRODUCT_ICON_PNG "${CMAKE_CURRENT_SOURCE_DIR}/app/ios/FORDLink/Assets.xcassets/AppIcon.appiconset/AppIcon-60@3x.png")
+  target_link_libraries(fordlink-discover PRIVATE FORDLink::Core)
   if(MSVC)
     target_compile_options(fordlink-discover PRIVATE
       "/FI${CMAKE_CURRENT_SOURCE_DIR}/src/link/platform/windows/link-discover-theme.h")
