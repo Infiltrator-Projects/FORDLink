@@ -178,7 +178,8 @@ static void append_modules(GtkWidget *body, ProductContext *context)
                 fordlink_module_scanner_result_count(&context->ford_scan));
             link_gtk_card_append_status(
                 ford, status,
-                context->ford_scan_complete ? "state-success" : "state-warning");
+                context->ford_scan_complete && context->ford_scan_success
+                    ? "state-success" : "state-warning");
             for (index = 0U;
                  index < fordlink_module_scanner_result_count(&context->ford_scan);
                  ++index) {
@@ -201,7 +202,10 @@ static void append_modules(GtkWidget *body, ProductContext *context)
                 link_gtk_card_append_detail(ford, key, value);
                 ++shown;
             }
-            if (shown == 0U && context->ford_scan_complete)
+            if (context->ford_scan_complete && !context->ford_scan_success)
+                link_gtk_card_append_note(ford,
+                    "Ford module scan ended without completing successfully; results may be incomplete.");
+            else if (shown == 0U && context->ford_scan_complete)
                 link_gtk_card_append_note(ford,
                     "No corroborated HS-CAN module endpoint answered this read-only pass.");
         }

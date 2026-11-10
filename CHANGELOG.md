@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.32 — 2026-11-10
+
+- Correct failed Ford module scan status in the Linux GUI.
+- Run the existing CI qualification on pull requests before publication.
+
 ## 0.2.31 — 2026-10-17
 
 - Pin the qualified canonical Link package and its Libraries dependency.
