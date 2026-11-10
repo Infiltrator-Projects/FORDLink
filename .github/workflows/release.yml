@@ -26,6 +26,21 @@ jobs:
           ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           persist-credentials: false
+      - name: Stage GitHub CLI in temporary runner workspace
+        shell: bash
+        run: |
+          set -euo pipefail
+          if command -v gh >/dev/null 2>&1; then exit 0; fi
+          root="$RUNNER_TEMP/gh-cli"
+          download="$RUNNER_TEMP/gh-cli-download"
+          rm -rf "$root" "$download"
+          mkdir -p "$root" "$download"
+          (cd "$download" && apt-get download gh)
+          packages=("$download"/*.deb)
+          test "${#packages[@]}" -eq 1
+          dpkg-deb -x "${packages[0]}" "$root"
+          test -x "$root/usr/bin/gh"
+          echo "$root/usr/bin" >> "$GITHUB_PATH"
       - name: Download candidates from the successful CI run
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
