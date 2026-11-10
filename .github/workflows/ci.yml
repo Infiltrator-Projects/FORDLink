@@ -115,6 +115,27 @@ jobs:
           libdir="$(dirname "$(dirname "$pc")")"
           echo "PKG_CONFIG_PATH=$(dirname "$pc")${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}" >> "$GITHUB_ENV"
           echo "LD_LIBRARY_PATH=$libdir${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
+      - name: Bootstrap BlueZ development files for self-hosted Linux
+        if: runner.environment == 'self-hosted'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if test -f /usr/include/bluetooth/bluetooth.h &&
+             test -f /usr/lib/x86_64-linux-gnu/libbluetooth.so; then
+            exit 0
+          fi
+          root="$RUNNER_TEMP/bluez-dev"
+          dl="$RUNNER_TEMP/bluez-download"
+          rm -rf "$root" "$dl"
+          mkdir -p "$root" "$dl"
+          cd "$dl"
+          apt-get download libbluetooth-dev libbluetooth3
+          for deb in ./*.deb; do dpkg-deb -x "$deb" "$root"; done
+          test -f "$root/usr/include/bluetooth/bluetooth.h"
+          test -f "$root/usr/lib/x86_64-linux-gnu/libbluetooth.so"
+          echo "CMAKE_INCLUDE_PATH=$root/usr/include${CMAKE_INCLUDE_PATH:+:$CMAKE_INCLUDE_PATH}" >> "$GITHUB_ENV"
+          echo "CMAKE_LIBRARY_PATH=$root/usr/lib/x86_64-linux-gnu${CMAKE_LIBRARY_PATH:+:$CMAKE_LIBRARY_PATH}" >> "$GITHUB_ENV"
+          echo "LD_LIBRARY_PATH=$root/usr/lib/x86_64-linux-gnu${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}" >> "$GITHUB_ENV"
       - name: Bootstrap Xvfb for self-hosted Linux
         if: runner.environment == 'self-hosted'
         shell: bash
